@@ -1,0 +1,149 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html5>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "DataTables/datatables.css" %}"/>
+        <link rel="stylesheet" type="{% static "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %}"/>
+        <link rel="stylesheet" type="{% static "css/fontawesome/css/all.css" %}"/>
+       
+    </head>
+    <body>
+        <section class="navbar">
+            <div class="logo"><a href="{% url 'home' %}"><img src="./static/images/kilo-logo.svg" alt="logo" width="150px"/></a></div>
+            <div class="menu">
+                <ul class="lists">
+                    <a href="{% url 'home' %}"><li class="active">Home</li></a>
+                    <a href="{% url 'farmers' %}"><li>Farmers</li></a>
+                    <a href="{% url 'home' %}"><li>Transactions</li></a>
+                    <a href="{% url 'home' %}"><li>Reports</li></a>
+                    <a href="{% url 'home' %}"><li>Settings</li></a>
+                </ul>
+            </div>
+        </section>
+        <section class="intro"><div class="entry_level"><h4>Good Day <span class="reed">{{user}}</span> | <span class="lgiat">LOGOUT</span> </section>
+        <section class="header">
+            
+            <div class="image-section"><img src="./static/images/SVG/precise.svg" alt="precise logo" width="300px"></div>
+            <div class="totals">
+                <p class="croping">Total Collections</h3>
+                    <h2 class="num">23453</h2>
+                    <button class="view-all">View All Transactions</button>
+            </div>
+        </section>
+
+        <section class="cardy">
+            <div class="cardy-box">
+                <div class="icons">
+                    <img src="./static/images/SVG/farmer.svg" alt="variety" width="80px">
+                </div>
+                <div class="variety">
+                    <p class="croping">Total Farmers</h3>
+                    <h2 class="num">{{ total_farmers}}</h2>
+                </div>
+            </div>
+            <div class="cardy-box">
+                <div class="icons">
+                    <img src="./static/images/SVG/variety.svg" alt="variety" width="80px">
+                </div>
+                <div class="variety">
+                    <p class="croping">Total Crop Varieties</h3>
+                    <h2 class="num">{{total_variety}}</h2>
+                </div>
+            </div>
+            <div class="cardy-box">
+                <div class="icons">
+                    <img src="./static/images/SVG/input.svg" alt="variety" width="80px">
+                </div>
+                <div class="variety">
+                    <p class="croping">Total Input Requests</h3>
+                    <h2 class="num">{{total_input}}</h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="datas">
+            <div class="farmers-top-ten">
+                <div class="tbheaders"><h3>Latest Farmers</h3><a href="{% url 'farmers' %}"><p class="viwe">VIEW ALL</p></a></div>    
+                <table id="example" class="content-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Farmer No.</th>
+                            <th>Farmer Name</th>
+                            <th>No. of Trees</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for allfarmers in allfarmers %}
+                        <tr>
+                            <td>{{allfarmers.farmer_number}}</td>
+                            <td>{{allfarmers.member_name}}</td>
+                            <td>{{allfarmers.no_of_trees}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                    <tfoot>
+                       
+                    </tfoot>
+                </table>
+            </div>
+            <div class="tx-top-ten">
+                
+                <div class="tbheaders"><h3>Latest Transactions</h3><a href="{% url 'farmers' %}"><p class="viwe">VIEW ALL</p></a></div>    
+                <table id="example" class="content-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction No</th>
+                            <th>Farmer Name</th>
+                            <th>Variety</th>
+                            <th>Gross Weight</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Friday, 29 April 2022</td>
+                            <td>AEA/XD/030/2202</td>
+                            <td>ngomano</td>
+                            <td>Mbuni</td>
+                            <td>20kg</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>Friday, 29 April 2022</td>
+                            <td>AEA/XD/030/2202</td>
+                            <td>ngomano</td>
+                            <td>Mbuni</td>
+                            <td>20kg</td>
+                           
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                       
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="copyright">&copy; 2022 KiloSahihi</div>
+            <div class="aea"><p class="kilo">KiloSahihi is a Product of <a href="https://aealimited.com/">AEA LIMITED</a></p></div>
+        </footer>
+        
+        <script src="static/js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="static/DataTables/datatables.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html5>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="stylesheet" type="text/css" href="{% static "DataTables/datatables.css" %}"/>
+        <link rel="stylesheet" type="{% static "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" %}"/>
+        <link rel="stylesheet" type="{% static "css/fontawesome/css/all.css" %}"/>
+       
+    </head>
+    <body>
+        <section class="navbar">
+            <div class="logo"><a href="{% url 'home' %}"><img src="/static/images/kilo-logo.svg" alt="logo" width="150px"/></a></div>
+            <div class="menu">
+                <ul class="lists">
+                    <a href="{% url 'home' %}"><li class="active">Home</li></a>
+                    <a href="{% url 'farmers' %}"><li>Farmers</li></a>
+                    <a href="{% url 'home' %}"><li>Transactions</li></a>
+                    <a href="{% url 'home' %}"><li>Reports</li></a>
+                    <a href="{% url 'home' %}"><li>Settings</li></a>
+                </ul>
+            </div>
+        </section>
+        <section class="intro"><div class="entry_level"><h4>Good Day <span class="reed">{{user}}</span> | <span class="lgiat">LOGOUT</span> </section>
+        <section class="header">
+            
+            <div class="farmer-totals"><img src="/static/images/SVG/precise.png" alt="precise logo" width="300px"></div>
+            <div class="totals">
+                <p class="croping">Total Number of <br>Registered Farmers</h3>
+                    <h2 class="num">{{ total_farmers}}</h2>
+                    <button class="view-all">Add New Farmer</button>
+            </div>
+        </section>
+
+        <section class="datas-farmers">
+            <div class="farmers-top-ten">
+                <div class="tbheaders"><h3>Farmers List</h3></div>  
+                <form method="get">
+                    {{myFilter.form}}
+                    <button type="submit">Search</button>
+                </form>  
+                <table id="example" class="content-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Farmer No.</th>
+                            <th>Farmer Name</th>
+                            <th>County</th>
+                            <th>ID Number</th>
+                            <th>Year of Birth</th>
+                            <th>Phone Number</th>
+                            <th>No of Trees</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for allfarmers in farmers_number %}
+                        <tr>
+                            <td>{{allfarmers.farmer_number}}</td>
+                            <td>{{allfarmers.member_name}}</td>
+                            <td>{{allfarmers.county}}</td>
+                            <td>{{allfarmers.id_no}}</td>
+                            <td>{{allfarmers.year_of_birth}}</td>
+                            <td>{{allfarmers.phone_number}}</td>
+                            <td>{{allfarmers.no_of_trees}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                    <tfoot>
+                       
+                    </tfoot>
+                </table>
+        <section class="pagina">
+            <div class="paginaone">
+                {% if farmers_number.has_previous %}
+                    <a href="?page=1" class="last">First | </a>
+                    <a href="?page={{farmers_number.previous_page_number}}">Previous</a>
+                {% endif %}
+| 
+                Page {{farmers_number.number }} of {{farmers_number.paginator.num_pages}}
+|
+                {% if farmers_number.has_next %}
+                    <a href="?page={{farmers_number.next_page_number}}">Next | </a>
+                    <a href="?page={{farmers_number.paginator.num_pages}}" class="last">Last</a>
+                {% endif %}
+            </div>
+            <div class="paginatwo">
+              <a href="{% url 'print_farmers' %}"> <button class="view-alls-pdf">Export List to PDF</button></a>
+            </div>
+        </section>            
+        </section>
+
+        <footer class="footer">
+            <div class="copyright">&copy; 2022 KiloSahihi</div>
+            <div class="aea"><p class="kilo">KiloSahihi is a Product of <a href="https://aealimited.com/">AEA LIMITED</a></p></div>
+        </footer>
+        
+        <script src="static/js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="static/DataTables/datatables.min.js"></script>
+    </body>
+</html>
